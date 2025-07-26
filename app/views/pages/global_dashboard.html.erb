@@ -2,16 +2,26 @@
   <h1 class="fw-bold">Global Analytics:</h1>
 
   <div class="tabs row my-4 column-gap-4" style="height: 250px;">
-    <div class="col border border-primary-subtle p-4 d-flex flex-column justify-content-center align-items-center">
-      1
+    <div class="col border border-success-subtle p-4 d-flex flex-column justify-content-center align-items-center">
+      <h2 class="mb-2 fw-bold" style="color: green;" ><%= @requests.count %></h2>
+      <p>total requests, coming from:</p>
+      <h2 class="mb-2 fw-bold" style="color: green;" ><%= @requests_ips.count %></h2>
+      <p>unique IPs</p>
     </div>
 
-    <div class="col border border-primary-subtle p-4 d-flex flex-column justify-content-center align-items-center">
-      2
+    <div class="col border border-success-subtle p-4 d-flex flex-column justify-content-center align-items-center">
+      <% per = RequestAnalytic.count.to_f / Request.count * 100 %>
+      <h2 class="mb-2 fw-bold" style="color: green;"><%= per.nan? ? 0 : per.round(2) %>%</h2>
+      <p>are unique requests</p>
+      <p><span class="fw-bold" style="color: green;"><%= RequestAnalytic.count %></span> out of <span class="fw-bold" style="color: green;"><%= Request.count %></span> </p>
     </div>
 
-    <div class="col border border-primary-subtle p-4 d-flex flex-column justify-content-center align-items-center">
-      3
+    <div class="col border border-success-subtle p-4 d-flex flex-column justify-content-center align-items-center">
+      <h2 class="mb-2 fw-bold" style="color: green;"><%= @request_today.count %></h2>
+      <p>requests were made today</p>
+
+      <p ><%= @request_today.count > @daily_average ? "above" : "below" %> daily average <span class="fw-bold" style="color: green;">(<%= @daily_average %>)</span> </p>
+
     </div>
 
   </div>

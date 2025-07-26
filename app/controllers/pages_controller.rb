@@ -9,5 +9,9 @@ class PagesController < ApplicationController
   end
 
   def global_dashboard
+    @requests = Request.all
+    @requests_ips = @requests.to_a.group_by(&:ip_adress)
+    @request_today = Request.where(timestamp: Date.today)
+    @daily_average = Request.count / 30
   end
 end
