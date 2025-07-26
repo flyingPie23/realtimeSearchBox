@@ -1,0 +1,24 @@
+<div class="container my-4">
+  <h1>Your Analytics:</h1>
+  <div class="tabs row my-4 column-gap-4" style="height: 300px;">
+    <div class="col border border-primary-subtle p-4 d-flex flex-column justify-content-center align-items-center">
+      <p class="mb-2">You have made</p>
+      <h1 class="mb-2 fw-bold" style="color: blue;"><%= @requests.count %></h1>
+      <p>searches so far</p>
+    </div>
+
+    <div class="col border border-primary-subtle p-4 d-flex flex-column justify-content-center align-items-center">
+      <p class="mb-2">You have made</p>
+      <h1 class="mb-2 fw-bold" style="color: blue;">xxx Search</h1>
+      <p>in the past 5 days</p>
+    </div>
+
+    <div class="col border border-primary-subtle p-4 d-flex flex-column justify-content-center align-items-center">
+      <p class="mb-2">You searches count for</p>
+      <h1 class="mb-2 fw-bold" style="color: blue;"><%= @requests.count.to_f / Request.count * 100 %> % </h1>
+      <p>all searches so far</p>
+    </div>
+
+  </div>
+
+</div>
