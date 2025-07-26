@@ -38,6 +38,20 @@ class RequestsController < ApplicationController
     redirect_to user_dashboard_path
   end
 
+  def search_suggestions
+  query = params[:query].to_s.strip
+
+  suggestions = Request
+    .where("query ILIKE ?", "%#{query}%")  # Match anywhere in the string
+    .distinct
+    .order(:query)
+    .limit(5)
+    .pluck(:query)
+
+  render json: suggestions
+end
+
+
   private
   def generate_fake_queries
     prefix = [ "what is", "where to find", "reviews of" ]

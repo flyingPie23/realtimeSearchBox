@@ -33,6 +33,13 @@
 
   </div>
 
+  <div class="tabs row my-4 column-gap-4">
+    <div class="col border border-primary-subtle p-4">
+      <h3 class="mb-2 fw-bold">Your daily search graph:</h3>
+      <%= line_chart(Request.where(ip_adress: @ip).group_by_day(:timestamp).count,colors: ["#03045e", "#666"]) %>
+    </div>
+  </div>
+
   <div class="tabs row my-4 column-gap-4 mb-4" style="height: 250px;">
     <div class="col border border-primary-subtle p-4">
       <h3 class="fw-bold mb-3">Your top searches:</h3>

@@ -12,21 +12,26 @@ document.addEventListener('turbo:load', function () {
     const searchMessage = document.getElementById('search-message');
     const wordMessage = document.getElementById('last-word-message');
 
-    if (event.key === ' ') {
-      if (query) {
-        const logItem = document.createElement('div');
-
-        if (wordMessage.children.length >= 3) {
-          wordMessage.removeChild(wordMessage.lastChild);
-        }
-
-        logItem.textContent = query;
-        wordMessage.insertBefore(logItem, wordMessage.firstChild);
-      }
-    }
-
     if (event.key) {
       searchMessage.innerHTML = '';
+
+      if (query) {
+        console.log("Sending query:", query);
+
+        fetch(`/search_suggestions?query=${encodeURIComponent(query)}`)
+          .then(response => response.json())
+          .then(suggestions => {
+            wordMessage.innerHTML = ''; // clear old suggestions
+            console.log("Received suggestions:", suggestions);
+
+            suggestions.slice(0, 3).forEach(suggestion => {
+              const logItem = document.createElement('div');
+              logItem.textContent = suggestion;
+              wordMessage.appendChild(logItem);
+            });
+          })
+          .catch(err => console.error('Suggestion fetch error:', err));
+      }
     }
 
 

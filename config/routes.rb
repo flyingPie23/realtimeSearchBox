@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get "home" => "pages#home", as: :home
   get "userdashboard" => "pages#user_dashboard", as: :user_dashboard
   get "globaldashboard" => "pages#global_dashboard", as: :global_dashboard
+  get "/search_suggestions", to: "requests#search_suggestions"
 
   post "simulate_requests", to: "requests#simulate_requests", as: :simulate_requests
 
