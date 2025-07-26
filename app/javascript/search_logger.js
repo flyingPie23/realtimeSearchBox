@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     if (event.key === 'Enter') {
-      searchMessage.textContent = `Your search is: "${query}"`;
+      searchMessage.textContent = `Your search was: "${query}"`;
       fetch('/requests', {
         method: 'POST',
         headers: {
