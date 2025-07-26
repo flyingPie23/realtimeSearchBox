@@ -10,14 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_25_214149) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_26_105340) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "request_analytics", force: :cascade do |t|
+    t.bigint "request_id", null: false
+    t.integer "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["request_id"], name: "index_request_analytics_on_request_id"
+  end
 
   create_table "requests", force: :cascade do |t|
     t.string "ip_adress"
     t.string "query"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "timestamp"
   end
+
+  create_table "requets_analytics", force: :cascade do |t|
+    t.bigint "request_id", null: false
+    t.integer "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["request_id"], name: "index_requets_analytics_on_request_id"
+  end
+
+  add_foreign_key "request_analytics", "requests"
+  add_foreign_key "requets_analytics", "requests"
 end

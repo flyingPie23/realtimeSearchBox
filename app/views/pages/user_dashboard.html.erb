@@ -1,24 +1,55 @@
 <div class="container my-4">
-  <h1>Your Analytics:</h1>
-  <div class="tabs row my-4 column-gap-4" style="height: 300px;">
+  <h1 class="fw-bold">Your Analytics:</h1>
+
+  <div class="tabs row my-4 column-gap-4" style="height: 250px;">
     <div class="col border border-primary-subtle p-4 d-flex flex-column justify-content-center align-items-center">
       <p class="mb-2">You have made</p>
-      <h1 class="mb-2 fw-bold" style="color: blue;"><%= @requests.count %></h1>
+      <h2 class="mb-2 fw-bold" style="color: blue;" ><%= @requests.count %></h2>
       <p>searches so far</p>
     </div>
 
     <div class="col border border-primary-subtle p-4 d-flex flex-column justify-content-center align-items-center">
       <p class="mb-2">You have made</p>
-      <h1 class="mb-2 fw-bold" style="color: blue;">xxx Search</h1>
+      <h2 class="mb-2 fw-bold" style="color: blue;"><%= @requests_5days.count %> Search</h2>
       <p>in the past 5 days</p>
     </div>
 
     <div class="col border border-primary-subtle p-4 d-flex flex-column justify-content-center align-items-center">
       <p class="mb-2">You searches count for</p>
-      <h1 class="mb-2 fw-bold" style="color: blue;"><%= @requests.count.to_f / Request.count * 100 %> % </h1>
+
+      <% per = @requests.count.to_f / Request.count * 100 %>
+      <h2 class="mb-2 fw-bold" style="color: blue;"> <%= per.nan? ? 0 : per.round(2) %>%</h2>
       <p>all searches so far</p>
     </div>
 
+  </div>
+
+  <div class="tabs row my-4 column-gap-4 mb-4" style="height: 250px;">
+    <div class="col border border-primary-subtle p-4">
+      <h3 class="fw-bold mb-3">Your top searches:</h3>
+
+      <ol>
+        <%@top_requests.each do |request| %>
+          <li class="mb-2">
+            <span class="fw-bold"><%= request.request.query %></span>
+            <span class="text-muted">(<%= request.count %> times)</span>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+
+    <div class="col border border-primary-subtle p-4">
+      <h3 class="fw-bold mb-3">Your recent searches:</h3>
+
+      <ol>
+        <%@requests.order(created_at: :desc).limit(5).each do |request| %>
+          <li class="mb-2">
+            <span class="fw-bold"><%= request.query %></span>
+            <span class="text-muted">on <%= request.timestamp %></span>
+          </li>
+        <% end %>
+      </ol>
+    </div>
   </div>
 
 </div>
