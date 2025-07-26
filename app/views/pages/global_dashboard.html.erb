@@ -1,7 +1,7 @@
 <div class="container my-4">
   <h1 class="fw-bold">Global Analytics:</h1>
 
-  <div class="tabs row my-4 column-gap-4" style="height: 250px;">
+  <div class="tabs row my-4 column-gap-4 mx-2" style="height: 250px;">
     <div class="col border border-success-subtle p-4 d-flex flex-column justify-content-center align-items-center">
       <h2 class="mb-2 fw-bold" style="color: green;" ><%= @requests.count %></h2>
       <p>total requests, coming from:</p>
@@ -23,6 +23,15 @@
       <p ><%= @request_today.count > @daily_average ? "above" : "below" %> daily average <span class="fw-bold" style="color: green;">(<%= @daily_average %>)</span> </p>
 
     </div>
+  </div>
 
+  <div class="border border-success-subtle p-4 mx-2 my-4">
+    <h3 class="fw-bold mb-4">daily requests graph:</h3>
+    <%= line_chart Request.group_by_day(:timestamp).count, colors: ["#008000", "#666"] %>
+  </div>
+
+  <div class="border border-success-subtle p-4 mx-2 my-4">
+    <h3 class="fw-bold mb-4">Top searches Overall:</h3>
+     <%= bar_chart(RequestAnalytic.joins(:request).group('requests.query').order('SUM(request_analytics.count) DESC').limit(5).sum(:count), colors: ["#008000", "#666"]) %>
   </div>
 </div>
