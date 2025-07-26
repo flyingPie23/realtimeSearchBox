@@ -1,5 +1,5 @@
-
-document.addEventListener('DOMContentLoaded', function () {
+console.log('Search Logger Initialized');
+document.addEventListener('turbo:load', function () {
   const input = document.getElementById('search-input');
 
 

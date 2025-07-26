@@ -14,8 +14,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "pages#home"
+
+  get "home" => "pages#home", as: :home
   get "userdashboard" => "pages#user_dashboard", as: :user_dashboard
   get "globaldashboard" => "pages#global_dashboard", as: :global_dashboard
+
+  post "simulate_requests", to: "requests#simulate_requests", as: :simulate_requests
+
+  delete "clear_requests", to: "requests#clear_requests", as: :clear_requests
+
 
   resources :requests, only: [ :create ]
 end

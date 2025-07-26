@@ -1,5 +1,14 @@
 <div class="container my-4">
-  <h1 class="fw-bold">Your Analytics:</h1>
+  <div class="d-flex justify-content-between">
+    <h1 class="fw-bold">Your Analytics:</h1>
+
+    <div class="d-flex">
+      <%= button_to "Simulate Requests", simulate_requests_path, class: "btn btn-outline-success mx-2", method: :post, remote: true, form: { data: { turbo: false } } %>
+      <%= button_to "Clear My Requests", clear_requests_path, class: "btn btn-outline-danger mx-2", method: :delete, remote: true, form: { data: { turbo: false } } %>
+    </div>
+
+
+  </div>
 
   <div class="tabs row my-4 column-gap-4" style="height: 250px;">
     <div class="col border border-primary-subtle p-4 d-flex flex-column justify-content-center align-items-center">
