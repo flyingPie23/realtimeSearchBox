@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#home"
   get "userdashboard" => "pages#user_dashboard", as: :user_dashboard
+  get "globaldashboard" => "pages#global_dashboard", as: :global_dashboard
 
   resources :requests, only: [ :create ]
 end
