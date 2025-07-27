@@ -21,7 +21,7 @@ document.addEventListener('turbo:load', function () {
         fetch(`/search_suggestions?query=${encodeURIComponent(query)}`)
           .then(response => response.json())
           .then(suggestions => {
-            wordMessage.innerHTML = ''; // clear old suggestions
+            wordMessage.innerHTML = '';
             console.log("Received suggestions:", suggestions);
 
             suggestions.slice(0, 3).forEach(suggestion => {
