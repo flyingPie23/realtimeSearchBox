@@ -39,17 +39,17 @@ class RequestsController < ApplicationController
   end
 
   def search_suggestions
-  query = params[:query].to_s.strip
+    query = params[:query].to_s.strip
 
-  suggestions = Request
-    .where("query ILIKE ?", "%#{query}%")  # Match anywhere in the string
-    .distinct
-    .order(:query)
-    .limit(5)
-    .pluck(:query)
+    suggestions = Request
+      .where("query ILIKE ?", "%#{query}%")
+      .distinct
+      .order(:query)
+      .limit(5)
+      .pluck(:query)
 
-  render json: suggestions
-end
+    render json: suggestions
+  end
 
 
   private
